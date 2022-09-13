@@ -28,13 +28,13 @@ const router = createRouter({
   routes
 })
 
-router.beforeEach(async (to, from) => {
-  const user = await store.getters["user"];
-  const isAuthenticated = Object.prototype.hasOwnProperty.call(user, "token");
-  if (!isAuthenticated && to.name !== 'login' && to.name !== 'signup') {
-    // redirect the user to the login page
-    return { name: 'login' }
-  }
-})
+// router.beforeEach(async (to, from) => {
+//   const user = await store.getters["user"];
+//   const isAuthenticated = Object.prototype.hasOwnProperty.call(user, "token");
+//   if (!isAuthenticated && to.name !== 'login' && to.name !== 'signup') {
+//     // redirect the user to the login page
+//     return { name: 'login' }
+//   }
+// })
 
 export default router

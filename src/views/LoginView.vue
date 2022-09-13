@@ -32,7 +32,7 @@
               <Button mod="primary" type="submit" width="100%"> Log In</Button>
               <p class="register">
                 Don't have an account?
-                <router-link to="register">Sign Up</router-link>
+                <RouterLink to="/sign-up">Sign Up</RouterLink>
               </p>
             </form>
         </div>
