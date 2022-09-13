@@ -1,7 +1,6 @@
 <template>
   <button
       :type="type"
-      @click="onClick"
       :class="`button button--${mod} ${disabled ? 'disabled' : ''}`"
       :style="{ width }"
       :disabled="disabled"
@@ -35,11 +34,6 @@ export default defineComponent({
     font: {
       type: String,
       default: "14px",
-    },
-  },
-  methods: {
-    onClick() {
-      this.$emit("click");
     },
   },
 })
