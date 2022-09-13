@@ -1,5 +1,13 @@
 <template>
-  <button :type="type">{{text}}</button>
+  <button
+      :type="type"
+      @click="onClick"
+      :class="`button button--${mod} ${disabled ? 'disabled' : ''}`"
+      :style="{ width }"
+      :disabled="disabled"
+  >
+    <slot></slot>
+  </button>
 </template>
 
 <script lang="ts">
@@ -8,44 +16,145 @@ import {defineComponent} from "vue";
 export default defineComponent({
   name: "ButtonPrimary",
   props: {
-    text: {
-      type: String,
-      required: true
-    },
     type: {
       type: String,
-      default: "button"
-    }
-  }
+      default: "button",
+    },
+    mod: {
+      type: String,
+      default: "primary",
+    },
+    disabled: {
+      type: Boolean,
+      default: false,
+    },
+    width: {
+      type: String,
+      default: "",
+    },
+    font: {
+      type: String,
+      default: "14px",
+    },
+  },
+  methods: {
+    onClick() {
+      this.$emit("click");
+    },
+  },
 })
 </script>
 
 <style lang="scss" scoped>
-button {
-  position: relative;
-  z-index: 50;
-  display: inline-block;
-  padding: 18px 24px;
-  -webkit-box-pack: center;
-  -webkit-justify-content: center;
-  -ms-flex-pack: center;
-  justify-content: center;
-  border-radius: 0;
-  background-color: #1d1f2e;
-  box-shadow: none;
-  -webkit-transition: background-color 400ms ease, opacity 400ms ease, box-shadow 400ms ease;
-  transition: background-color 400ms ease, opacity 400ms ease, box-shadow 400ms ease;
-  color: #fff;
-  font-size: 12px;
-  line-height: 18px;
-  font-weight: 700;
-  text-align: center;
-  letter-spacing: 2px;
-  text-decoration: none;
-  text-transform: uppercase;
+.button {
   border: none;
+  color: #ddd;
+  text-align: center;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  display: inline-block;
   cursor: pointer;
-  margin-bottom: 20px;
-  width: fit-content;
+  font-size: 11px;
+  font-weight: bold;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 15px;
+  letter-spacing: normal;
+  outline: none;
+  align-items: center;
+
+  &--primary {
+    background-color: $primary-color;
+    width: 112px;
+    border-radius: 8px;
+
+    &:disabled,
+    &[disabled] {
+      background-color: #455b7e;
+    }
+  }
+
+  &--empty-state {
+    background-color: $primary-color;
+    width: 190px;
+    border-radius: 10px;
+    font-size: 11px;
+
+    &:disabled,
+    &[disabled] {
+      background-color: #455b7e;
+    }
+  }
+
+  &--secondary {
+    background-color: $secondary-color;
+    width: 114px;
+    border-radius: 8px;
+
+    &:hover,
+    &:focus {
+      background-color: #6f6f6f;
+    }
+  }
+
+  &--success {
+    background-color: #45a07d;
+    border-radius: 8px;
+    width: 112px;
+
+    &:disabled,
+    &[disabled] {
+      color: rgba(255, 255, 255, 0.3);
+    }
+  }
+
+  &--danger {
+    background-color: #c3625e;
+    border-radius: 8px;
+    width: 112px;
+  }
+
+  &--inline {
+    background-color: transparent;
+    padding: 8px 14px;
+    border-radius: 4px;
+
+    &:hover,
+    &:focus {
+      background-color: #313c4d;
+    }
+  }
+
+  &--inline--danger {
+    color: #c3625e;
+    background-color: transparent;
+    padding: 8px 0;
+    border-radius: 4px;
+    transition: opacity 200ms ease-in;
+
+    &:hover,
+    &:focus {
+      opacity: 0.5;
+    }
+  }
+
+  &--inline--primary {
+    display: inherit;
+    color: $primary-color;
+    background-color: transparent;
+    padding: 4px 0;
+    border-radius: 4px;
+    transition: opacity 200ms ease-in;
+
+    &:hover,
+    &:focus {
+      opacity: 0.5;
+    }
+  }
+
+  &.disabled {
+    filter: opacity(0.5);
+    cursor: not-allowed;
+  }
 }
 </style>
