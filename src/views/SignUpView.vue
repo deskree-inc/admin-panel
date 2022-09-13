@@ -1,48 +1,50 @@
 <template>
   <div class="auth-wrapper">
-    <img src="@/assets/logo.svg" alt="deskree-logo" class="logo" />
+    <loading-spinner :text="preloader.text" :show="preloader.show"></loading-spinner>
+    <img src="@/assets/logo.svg" alt="deskree-logo" class="logo"/>
     <div class="container">
       <h1>Sign Up</h1>
       <div class="box">
         <div class="column">
-            <div class="content">
-              <TextInput
-                  v-model="form.email"
-                  label="Email Address"
-                  name="email"
-                  placeholder="Email"
-                  rules="required|email"
-                  :autoFocus="true"
-                  :showError="true"
-                  style="margin-bottom: 20px"
-              />
-              <TextInput
-                v-model="form.fullName"
-                label="Full Name"
-                name="fullName"
-                placeholder="Full Name"
-                rules="required|email"
-                :autoFocus="true"
-                :showError="true"
-                style="margin-bottom: 20px"
-              />
-              <TextInput
-                  v-model="form.password"
-                  label="Password"
-                  type="password"
-                  name="password"
-                  placeholder="Password"
-                  rules="required"
-                  :autoFocus="true"
-                  :showError="true"
-                  style="margin-bottom: 20px"
-              />
-            </div>
-            <Button mod="primary" width="100%" @click="signUp"> Sign up</Button>
-            <p class="register">
-              Already have have an account?
-              <RouterLink to="/login">Login here</RouterLink>
-            </p>
+          <div class="content">
+            <TextInput
+              v-model="form.email"
+              label="Email Address"
+              name="email"
+              placeholder="Email"
+              rules="required|email"
+              :autoFocus="true"
+              :showError="true"
+              style="margin-bottom: 20px"
+            />
+            <TextInput
+              v-model="form.fullName"
+              label="Full Name"
+              name="fullName"
+              placeholder="Full Name"
+              rules="required|email"
+              :autoFocus="true"
+              :showError="true"
+              style="margin-bottom: 20px"
+            />
+            <TextInput
+              v-model="form.password"
+              label="Password"
+              type="password"
+              name="password"
+              placeholder="Password"
+              rules="required"
+              :autoFocus="true"
+              :showError="true"
+              style="margin-bottom: 20px"
+            />
+          </div>
+          <span class="error" v-if="errors.length > 0">{{ errors[0].detail }}</span>
+          <Button mod="primary" width="100%" @click="signUp"> Sign up</Button>
+          <p class="register">
+            Already have have an account?
+            <RouterLink to="/login">Login here</RouterLink>
+          </p>
         </div>
       </div>
     </div>
@@ -50,20 +52,25 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue';
+import {defineComponent} from 'vue';
 import TextInput from "@/components/TextInput.vue";
 import Button from "@/components/Button.vue";
+import LoadingSpinner from "@/components/LoadingSpinner.vue";
 import {client} from "@/server";
-import {checkForErrors} from "@/utils";
 
 export default defineComponent({
   name: 'SignUpView',
   components: {
     TextInput,
     Button,
+    LoadingSpinner
   },
   data() {
     return {
+      preloader: {
+        text: "",
+        show: false
+      },
       form: {
         email: "",
         fullName: "",
@@ -73,8 +80,14 @@ export default defineComponent({
     };
   },
   methods: {
+    resetLoader() {
+      this.preloader.show = false;
+      this.preloader.text = "";
+    },
     async signUp() {
       try {
+        this.preloader.show = true;
+        this.preloader.text = "Creating an account...";
         // Create account with email and password
         const userData = await client.post('/auth/accounts/signup', {
           email: this.form.email,
@@ -91,17 +104,17 @@ export default defineComponent({
         this.$store.commit('saveUser', {
           uid: userData.data.data.uid,
           name: userObject.data.data.name,
-          email:  userData.data.data.email,
-          roles:  userObject.data.data.roles,
-          token:  userData.data.data.idToken,
-          refreshToken:  userData.data.data.refreshToken,
+          email: userData.data.data.email,
+          roles: userObject.data.data.roles,
+          token: userData.data.data.idToken,
+          refreshToken: userData.data.data.refreshToken,
         });
+        this.resetLoader();
         this.$router.push("/dashboard");
       } catch (e: any) {
+        this.resetLoader();
         console.error(e)
-        if (checkForErrors(e.response)) {
-          this.errors = e.response.data.errors;
-        }
+        this.errors = e.response.data.errors.errors;
       }
     }
   }
@@ -254,7 +267,7 @@ export default defineComponent({
   .error {
     font: normal normal normal 10px/16px Open Sans;
     color: $danger-color;
-    margin-bottom: 10px;
+    margin: 10px 0;
   }
 }
 </style>

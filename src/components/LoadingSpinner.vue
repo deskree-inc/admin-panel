@@ -2,7 +2,7 @@
   <div class="backdrop" v-show="show">
     <div class="content">
       <div class="animation">
-        <lottie-animation path="lottie/spinner.json" />
+        <lottie-animation path="lottie/loading.json" />
       </div>
       <p>{{ text }}</p>
     </div>

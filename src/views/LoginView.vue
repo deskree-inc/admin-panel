@@ -1,5 +1,6 @@
 <template>
   <div class="auth-wrapper">
+    <loading-spinner :text="preloader.text" :show="preloader.show"></loading-spinner>
     <img src="@/assets/logo.svg" alt="deskree-logo" class="logo" />
     <div class="container">
       <h1>Login</h1>
@@ -28,6 +29,7 @@
                     style="margin-bottom: 20px"
                 />
               </div>
+              <span class="error" v-if="errors.length > 0">{{ errors[0].detail }}</span>
               <Button mod="primary" width="100%" @click="login"> Log In</Button>
               <p class="register">
                 Don't have an account?
@@ -43,17 +45,22 @@
 import {defineComponent} from 'vue';
 import TextInput from "@/components/TextInput.vue";
 import Button from "@/components/Button.vue";
+import LoadingSpinner from "@/components/LoadingSpinner.vue";
 import {client} from "@/server";
-import {checkForErrors} from "@/utils";
 
 export default defineComponent({
   name: 'LoginView',
   components: {
     TextInput,
     Button,
+    LoadingSpinner
   },
   data() {
     return {
+      preloader: {
+        text: "",
+        show: false
+      },
       form: {
         email: '',
         password: '',
@@ -63,8 +70,14 @@ export default defineComponent({
   },
 
   methods: {
+    resetLoader() {
+      this.preloader.show = false;
+      this.preloader.text = "";
+    },
     async login() {
       try {
+        this.preloader.show = true;
+        this.preloader.text = "Logging in...";
         const userData = await client.post('/auth/accounts/sign-in/email', {
           email: this.form.email,
           password: this.form.password
@@ -78,12 +91,12 @@ export default defineComponent({
           token:  userData.data.data.idToken,
           refreshToken:  userData.data.data.refreshToken,
         });
+        this.resetLoader();
         this.$router.push("/dashboard");
       } catch (e: any) {
+        this.resetLoader();
         console.error(e)
-        if (checkForErrors(e.response)) {
-          this.errors = e.response.data.errors;
-        }
+        this.errors = e.response.data.errors.errors;
       }
     }
   }
@@ -236,7 +249,7 @@ export default defineComponent({
   .error {
     font: normal normal normal 10px/16px Open Sans;
     color: $danger-color;
-    margin-bottom: 10px;
+    margin: 10px 0;
   }
 }
 </style>
