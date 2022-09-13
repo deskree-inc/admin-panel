@@ -20,6 +20,13 @@ const routes: Array<RouteRecordRaw> = [
     name: 'dashboard',
     component: DashboardView,
     meta: { requiresAuth: true },
+    children: [
+      {
+        path: "analytics",
+        name: "Analytics",
+        component: () => import("../views/AnalyticsView.vue"),
+      },
+    ],
   }
 ]
 
