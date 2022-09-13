@@ -5,7 +5,6 @@
       <h1>Login</h1>
       <div class="box">
         <div class="column">
-            <form>
               <div class="content">
                 <TextInput
                     v-model="form.email"
@@ -29,12 +28,11 @@
                     style="margin-bottom: 20px"
                 />
               </div>
-              <Button mod="primary" type="submit" width="100%"> Log In</Button>
+              <Button mod="primary" width="100%" @click="login"> Log In</Button>
               <p class="register">
                 Don't have an account?
                 <RouterLink to="/sign-up">Sign Up</RouterLink>
               </p>
-            </form>
         </div>
       </div>
     </div>
@@ -45,6 +43,8 @@
 import {defineComponent} from 'vue';
 import TextInput from "@/components/TextInput.vue";
 import Button from "@/components/Button.vue";
+import {client} from "@/server";
+import {checkForErrors} from "@/utils";
 
 export default defineComponent({
   name: 'LoginView',
@@ -58,8 +58,35 @@ export default defineComponent({
         email: '',
         password: '',
       },
+      errors: [],
     };
   },
+
+  methods: {
+    async login() {
+      try {
+        const userData = await client.post('/auth/accounts/sign-in/email', {
+          email: this.form.email,
+          password: this.form.password
+        });
+        const userObject = await client.get(`/rest/collections/users/${userData.data.data.uid}`);
+        this.$store.commit('saveUser', {
+          uid: userData.data.data.uid,
+          name: userObject.data.data.name,
+          email:  userData.data.data.email,
+          roles:  userObject.data.data.roles,
+          token:  userData.data.data.idToken,
+          refreshToken:  userData.data.data.refreshToken,
+        });
+        this.$router.push("/dashboard");
+      } catch (e: any) {
+        console.error(e)
+        if (checkForErrors(e.response)) {
+          this.errors = e.response.data.errors;
+        }
+      }
+    }
+  }
 });
 </script>
 

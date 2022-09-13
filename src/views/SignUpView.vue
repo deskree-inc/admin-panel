@@ -5,7 +5,6 @@
       <h1>Sign Up</h1>
       <div class="box">
         <div class="column">
-          <form>
             <div class="content">
               <TextInput
                   v-model="form.email"
@@ -16,6 +15,16 @@
                   :autoFocus="true"
                   :showError="true"
                   style="margin-bottom: 20px"
+              />
+              <TextInput
+                v-model="form.fullName"
+                label="Full Name"
+                name="fullName"
+                placeholder="Full Name"
+                rules="required|email"
+                :autoFocus="true"
+                :showError="true"
+                style="margin-bottom: 20px"
               />
               <TextInput
                   v-model="form.password"
@@ -29,12 +38,11 @@
                   style="margin-bottom: 20px"
               />
             </div>
-            <Button mod="primary" type="submit" width="100%"> Log In</Button>
+            <Button mod="primary" width="100%" @click="signUp"> Sign up</Button>
             <p class="register">
               Already have have an account?
               <RouterLink to="/login">Login here</RouterLink>
             </p>
-          </form>
         </div>
       </div>
     </div>
@@ -45,6 +53,8 @@
 import { defineComponent } from 'vue';
 import TextInput from "@/components/TextInput.vue";
 import Button from "@/components/Button.vue";
+import {client} from "@/server";
+import {checkForErrors} from "@/utils";
 
 export default defineComponent({
   name: 'SignUpView',
@@ -55,13 +65,46 @@ export default defineComponent({
   data() {
     return {
       form: {
-        name: "",
         email: "",
         fullName: "",
         password: "",
       },
+      errors: [],
     };
   },
+  methods: {
+    async signUp() {
+      try {
+        // Create account with email and password
+        const userData = await client.post('/auth/accounts/signup', {
+          email: this.form.email,
+          password: this.form.password
+        });
+
+        // Update user object in the database
+        const userObject = await client.patch(`/rest/collections/users/${userData.data.data.uid}`, {
+          name: this.form.fullName,
+          roles: [],
+        });
+
+
+        this.$store.commit('saveUser', {
+          uid: userData.data.data.uid,
+          name: userObject.data.data.name,
+          email:  userData.data.data.email,
+          roles:  userObject.data.data.roles,
+          token:  userData.data.data.idToken,
+          refreshToken:  userData.data.data.refreshToken,
+        });
+        this.$router.push("/dashboard");
+      } catch (e: any) {
+        console.error(e)
+        if (checkForErrors(e.response)) {
+          this.errors = e.response.data.errors;
+        }
+      }
+    }
+  }
 });
 </script>
 

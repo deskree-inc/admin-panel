@@ -11,6 +11,7 @@
           }"
             :type="inputType"
             ref="input"
+            @input="$emit('update:modelValue', $event.target.value)"
             v-model="model"
             :placeholder="placeholder"
             :autoFocus="autoFocus"
@@ -61,10 +62,15 @@
 </template>
 
 <script lang="ts">
+import { ref } from "vue";
 import {defineComponent} from 'vue';
 
 export default defineComponent({
   name: "TextInput",
+  setup() {
+    const input = ref("");
+    return { input };
+  },
   props: {
     label: {
       type: String,
