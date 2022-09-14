@@ -28,8 +28,8 @@ export default defineComponent({
       },
     };
   },
-  mounted() {
-    this.getData();
+  async mounted() {
+    await this.getData();
   },
   methods: {
     resetLoader() {
