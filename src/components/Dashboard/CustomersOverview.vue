@@ -15,18 +15,12 @@
               <div class="cell">
                 <span>{{ val[1] }}</span>
               </div>
-              <img
-                src="@/assets/icons/2pixels.svg"
-                alt="2pixels"
-                class="two-pixels-left"
-              />
-              <img
-                src="@/assets/icons/2pixels.svg"
-                alt="2pixels"
-                class="two-pixels-right"
-              />
+              <img src="@/assets/icons/2pixels.svg" alt="2pixels" class="two-pixels-left" />
+              <img src="@/assets/icons/2pixels.svg" alt="2pixels" class="two-pixels-right" />
             </td>
-            <Button mod="primary" width="100%" style="margin-top: 8px">Create ticket</Button>
+            <Button mod="primary" width="100%" style="margin-top: 8px" @click="handleModal(item.company, item.name)"
+              >Create ticket</Button
+            >
           </tr>
         </tbody>
         <tbody v-else>
@@ -41,18 +35,40 @@
       </table>
     </main>
   </div>
+  <GenericModal
+    :show="openModal"
+    button-text="Save"
+    header-text="Create ticket"
+    @confirm="createTicket"
+    @discard="discardModal"
+  >
+    <TextInput :value="ticket.title" title="Title" :disabled="true" label="Title" style="margin-bottom: 10px" />
+    <TextInput
+      v-model="ticket.description"
+      label="Description"
+      rules="required"
+      :showError="true"
+      type="text"
+      style="margin-bottom: 10px"
+    />
+  </GenericModal>
 </template>
 
 <script lang="ts">
 import { defineComponent } from "vue";
 import HeaderCell from "@/components/HeaderCell.vue";
 import Button from "@/components/Button.vue";
+import GenericModal from "@/components/Modal.vue";
+import TextInput from "@/components/TextInput.vue";
+import { client } from "@/server";
 
 export default defineComponent({
   name: "CustomersOverview",
   components: {
-    HeaderCell,
     Button,
+    HeaderCell,
+    GenericModal,
+    TextInput,
   },
   props: {
     header: {
@@ -62,6 +78,35 @@ export default defineComponent({
     tables: {
       type: Array,
       required: true,
+    },
+  },
+  data() {
+    return {
+      openModal: false,
+      ticket: {
+        title: "",
+        description: "",
+      },
+    };
+  },
+  methods: {
+    handleModal(companyName: string, customerName: string) {
+      this.openModal = true;
+      this.ticket.title = `${companyName} | ${customerName}`;
+    },
+    discardModal() {
+      this.openModal = false;
+      this.ticket.title = "";
+    },
+    async createTicket(companyName: string, customerName: string) {
+      try {
+        await client.post("/integrations/github/repos/deskree-inc/admin-panel/issues", {
+          title: `${companyName} | ${customerName}`,
+          body: this.ticket.description,
+        });
+      } catch (e) {
+        console.error(e);
+      }
     },
   },
 });

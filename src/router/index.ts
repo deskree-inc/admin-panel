@@ -6,6 +6,10 @@ import store from "@/store";
 
 const routes: Array<RouteRecordRaw> = [
   {
+    path: '/',
+    redirect: '/dashboard/customers',
+  },
+  {
     path: '/login',
     name: 'login',
     component: LoginView

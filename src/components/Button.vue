@@ -57,6 +57,12 @@ export default defineComponent({
   outline: none;
   align-items: center;
 
+  &:active {
+    background-color: $label-color-white-1;
+    color: $primary-color;
+    border-color: $primary-color;
+  }
+
   &--primary {
     background-color: $primary-color;
     width: 112px;

@@ -1,59 +1,39 @@
 <template>
   <div class="text-input-container">
-      <label class="label">
-        <span v-if="label" class="label-text">{{ label }}</span>
-        <input
-            v-if="!maskType"
-            :class="{
-            'text-input-dark--disabled': disabled,
-            'text-input-light': inputTheme === 'light',
-            'text-input-dark': inputTheme === 'dark',
-          }"
-            :type="inputType"
-            ref="input"
-            @input="$emit('update:modelValue', $event.target.value)"
-            v-model="model"
-            :placeholder="placeholder"
-            :autoFocus="autoFocus"
-            :style="{ paddingRight: `${trailingTextWidth + 20}px` }"
-            :disabled="disabled"
-            @click="onInputClick"
-        />
-        <button
-            v-if="clearable && !!model"
-            type="button"
-            @click="clearValue"
-            class="clear-button"
-        >
-          <div class="clear-button-image" />
-        </button>
-        <div
-            v-if="trailingText"
-            class="trailing-text"
-            :style="{ width: `${trailingTextWidth}px` }"
-        >
-          {{ trailingText }}
-        </div>
+    <label class="label">
+      <span v-if="label" class="label-text">{{ label }}</span>
+      <input
+        :class="{
+          'text-input-dark--disabled': disabled,
+          'text-input-light': inputTheme === 'light',
+          'text-input-dark': inputTheme === 'dark',
+        }"
+        :type="inputType"
+        ref="input"
+        @input="$emit('update:modelValue', $event.target.value)"
+        v-model="model"
+        :placeholder="placeholder"
+        :autoFocus="autoFocus"
+        :style="{ paddingRight: `${trailingTextWidth + 20}px` }"
+        :disabled="disabled"
+        @click="onInputClick"
+      />
+      <button v-if="clearable && !!model" type="button" @click="clearValue" class="clear-button">
+        <div class="clear-button-image" />
+      </button>
+      <div v-if="trailingText" class="trailing-text" :style="{ width: `${trailingTextWidth}px` }">
+        {{ trailingText }}
+      </div>
 
-        <template v-if="type === 'password' && value.length > 0">
-          <transition v-if="showPassword" name="fade">
-            <img
-                src="@/assets/icons/hidden.svg"
-                class="eye-icon"
-                alt="eye"
-                @click="toggleShowPassword"
-            />
-          </transition>
-          <transition v-if="!showPassword" name="fade">
-            <img
-                src="@/assets/icons/revealed.svg"
-                class="eye-icon"
-                alt="eye"
-                @click="toggleShowPassword"
-            />
-          </transition>
-        </template>
-      </label>
+      <template v-if="type === 'password' && value.length > 0">
+        <transition v-if="showPassword" name="fade">
+          <img src="@/assets/icons/hidden.svg" class="eye-icon" alt="eye" @click="toggleShowPassword" />
+        </transition>
+        <transition v-if="!showPassword" name="fade">
+          <img src="@/assets/icons/revealed.svg" class="eye-icon" alt="eye" @click="toggleShowPassword" />
+        </transition>
+      </template>
+    </label>
 
     <div v-if="info" class="info">
       {{ info }}
@@ -63,7 +43,7 @@
 
 <script lang="ts">
 import { ref } from "vue";
-import {defineComponent} from 'vue';
+import { defineComponent } from "vue";
 
 export default defineComponent({
   name: "TextInput",
