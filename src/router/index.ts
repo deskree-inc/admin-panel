@@ -22,9 +22,9 @@ const routes: Array<RouteRecordRaw> = [
     meta: { requiresAuth: true },
     children: [
       {
-        path: "analytics",
-        name: "Analytics",
-        component: () => import("../views/AnalyticsView.vue"),
+        path: "customers",
+        name: "Customers",
+        component: () => import("../views/CustomersView.vue"),
       },
     ],
   }

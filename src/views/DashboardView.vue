@@ -22,7 +22,6 @@ export default defineComponent({
   data() {
     return {
       paths: [
-        "Analytics",
         "Customers",
         "Users",
       ],
