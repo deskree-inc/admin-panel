@@ -113,7 +113,7 @@ export default defineComponent({
           refreshToken: userData.data.data.refreshToken,
         });
         this.resetLoader();
-        this.$router.push("/dashboard/analytics");
+        this.$router.push("/dashboard/customers");
       } catch (e: any) {
         this.resetLoader();
         console.error(e)

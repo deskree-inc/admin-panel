@@ -54,6 +54,9 @@ export default defineComponent({
       },
     };
   },
+  mounted() {
+    console.log(this.users);
+  },
   methods: {
     async inviteUser() {
       try {

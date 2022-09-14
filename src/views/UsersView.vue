@@ -41,6 +41,7 @@ export default defineComponent({
           return {
             email: obj.attributes.email,
             name: obj.attributes.name,
+            uid: obj.uid,
           };
         });
       } catch (e) {

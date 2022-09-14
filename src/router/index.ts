@@ -36,7 +36,12 @@ const routes: Array<RouteRecordRaw> = [
         component: () => import("../views/UsersView.vue"),
       },
     ],
-  }
+  },
+  {
+    path: '/user-invite',
+    name: 'UserInvite',
+    component: () => import("../views/UserInviteView.vue"),
+  },
 ]
 
 const router = createRouter({
