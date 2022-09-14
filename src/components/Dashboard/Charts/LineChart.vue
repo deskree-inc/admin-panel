@@ -192,7 +192,7 @@ export default defineComponent({
     },
   },
   mounted() {
-    this.drawChat();
+    this.drawChart();
   },
 });
 </script>

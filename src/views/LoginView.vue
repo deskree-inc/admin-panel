@@ -82,7 +82,11 @@ export default defineComponent({
           email: this.form.email,
           password: this.form.password
         });
-        const userObject = await client.get(`/rest/collections/users/${userData.data.data.uid}`);
+        const userObject = await client.get(`/rest/collections/users/${userData.data.data.uid}`, {
+          headers: {
+            Authorization: `Bearer ${userData.data.data.idToken}`
+          }
+        });
         this.$store.commit('saveUser', {
           uid: userData.data.data.uid,
           name: userObject.data.data.name,
@@ -92,7 +96,7 @@ export default defineComponent({
           refreshToken:  userData.data.data.refreshToken,
         });
         this.resetLoader();
-        this.$router.push("/dashboard");
+        this.$router.push("/dashboard/analytics");
       } catch (e: any) {
         this.resetLoader();
         console.error(e)
