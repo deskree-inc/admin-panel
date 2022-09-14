@@ -1,0 +1,115 @@
+// overrides multiselect scss
+#App {
+  .multiselect__tags {
+    padding: 12px 20px 13px 15px;
+    cursor: pointer;
+    border: 2px solid transparent;
+    border-radius: 8px;
+  }
+
+  .multiselect__placeholder {
+    margin: 0;
+    font-size: 11px;
+    font-weight: bold;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 15px;
+    letter-spacing: normal;
+    color: #adadad;
+    padding: 0;
+  }
+
+  .multiselect--active .multiselect__placeholder {
+    display: inline-block;
+  }
+
+  .multiselect__select {
+    z-index: 2;
+    top: 50%;
+    transform: translateY(-50%);
+    padding: 0;
+    width: 28px;
+
+    &::before {
+      color: #ddd;
+      border-color: #ddd transparent transparent;
+      border-width: 4px 4px 0;
+      border-top-width: 7px;
+      top: 65%;
+    }
+  }
+
+  .multiselect__single {
+    color: #dddddd;
+    font-size: 11px;
+    font-weight: bold;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 15px;
+    letter-spacing: normal;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    align-items: center;
+  }
+
+  .multiselect__content-wrapper {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    border-radius: 10px;
+    background-color: #6f6f6f;
+    border-color: #6f6f6f;
+
+    .multiselect__option {
+      &:hover {
+        background-color: #5884cb;
+      }
+    }
+
+    .multiselect__option--selected {
+      background-color: transparent;
+    }
+
+    .multiselect__option--highlight {
+      background-color: #5884cb;
+    }
+  }
+
+  .multiselect--disabled {
+    background: rgba(221, 221, 221, 0.15);
+    border-radius: 8px;
+
+    .multiselect__select {
+      background: none;
+    }
+  }
+
+  //@media screen and (min-width: 1920px) {
+  //  .multiselect__tags {
+  //    padding: 16px 30px 16px 18px;
+  //    border-radius: 10px;
+  //  }
+  //
+  //  .multiselect__placeholder {
+  //    font-size: 14px;
+  //    line-height: normal;
+  //  }
+  //
+  //  .multiselect__single {
+  //    font-size: 14px;
+  //    line-height: normal;
+  //  }
+  //
+  //  .multiselect__select {
+  //    &::before {
+  //      border-top-width: 8px;
+  //      top: 75%;
+  //    }
+  //  }
+  //
+  //  .multiselect__content-wrapper {
+  //    padding-top: 8px;
+  //    padding-bottom: 8px;
+  //  }
+  //}
+}

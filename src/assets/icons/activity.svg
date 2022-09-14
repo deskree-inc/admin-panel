@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="25.049" height="25.049" viewBox="0 0 25.049 25.049">
+  <g id="Group_1695" data-name="Group 1695" transform="translate(0 0)">
+    <ellipse id="Ellipse_5" data-name="Ellipse 5" cx="12.524" cy="12.524" rx="12.524" ry="12.524" transform="translate(0 0)" fill="#ddd"/>
+    <g id="fitness-tracker" transform="translate(6.346 8.146)">
+      <path id="Path_129" data-name="Path 129" d="M18.483-30.23a.862.862,0,0,1-.8-.523L15.436-36.2l-1.466,2.62a.867.867,0,0,1-.758.436h-1.85a.846.846,0,0,1-.861-.829.846.846,0,0,1,.861-.829H12.7l2.1-3.75a.869.869,0,0,1,.808-.434.86.86,0,0,1,.751.522l2.106,5.1.713-1.828a.861.861,0,0,1,.806-.538H22a.846.846,0,0,1,.861.829.846.846,0,0,1-.861.829H20.577l-1.287,3.3a.861.861,0,0,1-.8.537Z" transform="translate(-10.5 38.986)" fill="#373737"/>
+    </g>
+  </g>
+</svg>

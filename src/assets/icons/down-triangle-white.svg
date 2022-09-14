@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="5px" height="5px" viewBox="0 0 5 5" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>down-triangle-white</title>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Artboard" transform="translate(-49.000000, -57.000000)" fill="#FFFFFF" fill-rule="nonzero">
+            <g id="down-triangle-white" transform="translate(49.000000, 57.000000)">
+                <path d="M2.02510496,0.242341796 C2.1155228,0.0919718809 2.27814415,4.4408921e-16 2.45360496,4.4408921e-16 C2.62906577,4.4408921e-16 2.79168713,0.0919718809 2.88210496,0.242341796 L4.83610496,3.4973418 C4.92867795,3.65183246 4.93101106,3.84417187 4.84221275,4.00086259 C4.75341444,4.15755331 4.58720804,4.25434181 4.40710496,4.25434181 L0.50010496,4.25434181 C0.320001876,4.25434181 0.153795478,4.15755331 0.064997169,4.00086259 C-0.0238011404,3.84417187 -0.0214680312,3.65183246 0.0711049601,3.4973418 L2.02510496,0.242341796 Z" id="Polygon_1" transform="translate(2.453605, 2.127171) rotate(180.000000) translate(-2.453605, -2.127171) "></path>
+            </g>
+        </g>
+    </g>
+</svg>

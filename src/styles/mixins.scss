@@ -1,0 +1,108 @@
+@mixin label {
+  color: #ddd;
+  font-size: 11px;
+  font-weight: 600;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 15px;
+  letter-spacing: normal;
+  display: inline-block;
+
+  //@media screen and (min-width: 1920px) {
+  //  font-size: 15px;
+  //  line-height: 1.4;
+  //}
+}
+
+@mixin create-project-container {
+  background-color: #262626;
+  border-radius: 18px;
+  margin: 0 auto;
+
+  //@media screen and (min-width: 1920px) {
+  //  border-radius: 20px;
+  //}
+}
+
+@mixin create-project-content {
+  padding: 40px 54px 43px;
+
+  //@media screen and (min-width: 1920px) {
+  //  padding: 70px 80px;
+  //}
+}
+
+@mixin create-project-navigation-container {
+  padding: 25px 54px;
+  background-color: #313131;
+  border-radius: 0 0 18px 18px;
+
+  //@media screen and (min-width: 1920px) {
+  //  padding: 40px 80px;
+  //  border-radius: 0 0 20px 20px;
+  //}
+}
+
+@mixin create-project-head {
+  font-size: 12px;
+  font-weight: 600;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 16px;
+  letter-spacing: normal;
+
+  //@media screen and (min-width: 1920px) {
+  //  font-size: 15px;
+  //  line-height: 1.4;
+  //}
+}
+
+@mixin create-project-head-message {
+  font-size: 11px;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.43;
+  letter-spacing: normal;
+  color: #969696;
+  margin-bottom: 33px;
+
+  //@media screen and (min-width: 1920px) {
+  //  font-size: 14px;
+  //  margin-bottom: 50px;
+  //}
+}
+
+@mixin flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@mixin analytics-section-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 30px;
+
+  .section-title {
+    font-size: 11px;
+    line-height: 15px;
+    font-weight: 600;
+    color: #ffffff;
+  }
+
+  .date-container {
+    display: flex;
+    align-items: center;
+
+    .date-label {
+      font-size: 11px;
+      font-weight: bold;
+      line-height: 15px;
+      padding-right: 20px;
+      border-right: 2px solid rgba(255, 255, 255, 0.1);
+      margin-right: 14px;
+    }
+  }
+}

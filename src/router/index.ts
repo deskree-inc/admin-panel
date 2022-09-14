@@ -6,6 +6,10 @@ import store from "@/store";
 
 const routes: Array<RouteRecordRaw> = [
   {
+    path: '/',
+    redirect: '/dashboard/customers',
+  },
+  {
     path: '/login',
     name: 'login',
     component: LoginView
@@ -20,7 +24,24 @@ const routes: Array<RouteRecordRaw> = [
     name: 'dashboard',
     component: DashboardView,
     meta: { requiresAuth: true },
-  }
+    children: [
+      {
+        path: "customers",
+        name: "Customers",
+        component: () => import("../views/CustomersView.vue"),
+      },
+      {
+        path: "users",
+        name: "Users",
+        component: () => import("../views/UsersView.vue"),
+      },
+    ],
+  },
+  {
+    path: '/user-invite',
+    name: 'UserInvite',
+    component: () => import("../views/UserInviteView.vue"),
+  },
 ]
 
 const router = createRouter({
@@ -28,13 +49,13 @@ const router = createRouter({
   routes
 })
 
-router.beforeEach(async (to, from) => {
-  const user = await store.getters["user"];
-  const isAuthenticated = Object.prototype.hasOwnProperty.call(user, "token");
-  if (!isAuthenticated && to.name !== 'login' && to.name !== 'signup') {
-    // redirect the user to the login page
-    return { name: 'login' }
-  }
-})
+// router.beforeEach(async (to, from) => {
+//   const user = await store.getters["user"];
+//   const isAuthenticated = Object.prototype.hasOwnProperty.call(user, "token");
+//   if (!isAuthenticated && to.name !== 'login' && to.name !== 'signup') {
+//     // redirect the user to the login page
+//     return { name: 'login' }
+//   }
+// })
 
 export default router

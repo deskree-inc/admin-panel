@@ -1,0 +1,163 @@
+.overview-section {
+  border-radius: 18px;
+  background: #1f2020;
+  padding: 40px;
+  margin-bottom: 30px;
+
+  .overview-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 30px;
+
+    .overview-title {
+      font-size: 11px;
+      line-height: 15px;
+      font-weight: 600;
+      color: #ffffff;
+    }
+  }
+
+  .overview-body {
+    .request-chart-container {
+      .chart-title {
+        font-size: 11px;
+        font-weight: 600;
+        color: #969696;
+        line-height: 15px;
+        margin-bottom: 2px;
+      }
+
+      .chart-statistics {
+        font-size: 18px;
+        font-weight: 600;
+        color: #dddddd;
+        line-height: 24px;
+      }
+    }
+
+    .chart-filter {
+      border-top: 3px solid #2f2f2f;
+      padding-top: 25px;
+      margin-top: 25px;
+      margin-left: 33px;
+
+      .filter-date {
+        margin-bottom: 25px;
+      }
+
+      .overview-filter-options {
+        .overview-filter-item {
+          display: flex;
+          align-items: center;
+          width: 100%;
+          margin-bottom: 17px;
+
+          .checkbox-wrapper {
+            display: flex;
+            align-items: center;
+            flex: 1;
+            justify-content: space-between;
+          }
+
+          .filter-statistics {
+            display: flex;
+            align-items: center;
+            width: 133px;
+            justify-content: space-between;
+            margin-left: 9px;
+
+            .filter-desc {
+              font-size: 11px;
+              font-weight: 600;
+              color: #969696;
+            }
+
+            .filter-percent {
+              font-size: 11px;
+              font-weight: 600;
+              color: #dddddd;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  //@media screen and (min-width: 1920px) {
+  //  border-radius: 20px;
+  //  padding: 60px;
+  //  margin-bottom: 40px;
+  //
+  //  .overview-header {
+  //    margin-bottom: 40px;
+  //
+  //    .overview-title {
+  //      font-size: 14px;
+  //      line-height: 19px;
+  //    }
+  //  }
+  //
+  //  .overview-body {
+  //    .request-chart-container {
+  //      .chart-title {
+  //        font-size: 14px;
+  //        line-height: 19px;
+  //      }
+  //
+  //      .chart-statistics {
+  //        font-size: 26px;
+  //        line-height: 35px;
+  //      }
+  //    }
+  //
+  //    .chart-filter {
+  //      padding-top: 40px;
+  //      margin-top: 40px;
+  //      margin-left: 53px;
+  //
+  //      .filter-date {
+  //        margin-bottom: 40px;
+  //      }
+  //
+  //      .overview-filter-options {
+  //        .overview-filter-item {
+  //          margin-bottom: 20px;
+  //
+  //          .filter-statistics {
+  //            .filter-desc {
+  //              font-size: 14px;
+  //            }
+  //
+  //            .filter-percent {
+  //              font-size: 14px;
+  //            }
+  //          }
+  //        }
+  //      }
+  //    }
+  //  }
+  //}
+
+  .text-white {
+    font-size: 11px;
+    font-weight: 600;
+    color: #dddddd;
+
+    //@media screen and (min-width: 1920px) {
+    //  font-size: 14px;
+    //  line-height: 19px;
+    //}
+  }
+
+  .text-gray {
+    font-size: 11px;
+    font-weight: 600;
+    color: #969696;
+
+    //@media screen and (min-width: 1920px) {
+    //  font-size: 14px;
+    //  line-height: 19px;
+    //}
+  }
+}
