@@ -25,7 +25,7 @@
                 :showError="true"
                 style="margin-bottom: 40px"
               />
-              <p v-if="error" class="error">{{ error }}</p>
+              <p v-if="errors.length !== 0" class="error">{{ error[0].detail }}</p>
             </div>
             <Button mod="primary" type="submit" width="100%">Join</Button>
           </form>
@@ -69,6 +69,7 @@ export default defineComponent({
         show: false
       },
       error: "",
+      errors: []
     };
   },
   async mounted() {
@@ -92,7 +93,7 @@ export default defineComponent({
         });
         await this.login();
       } catch (e) {
-        console.error(e.message);
+        console.error(e);
       }
     },
     resetLoader() {
