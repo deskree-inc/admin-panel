@@ -13,12 +13,12 @@ export default defineComponent({
   },
   data() {
     return {
-      code: this.$route.query.code,
+      code: this.$route.query.oobCode,
       uid: this.$route.query.uid,
     };
   },
   beforeCreate() {
-    const code = this.$route.query.code;
+    const code = this.$route.query.oobCode;
     const uid = this.$route.query.uid;
     if (code === undefined || uid === undefined) {
       this.$router.push("/login");

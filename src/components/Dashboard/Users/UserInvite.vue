@@ -1,5 +1,6 @@
 <template>
   <div class="auth-wrapper">
+    <loading-spinner :text="preloader.text" :show="preloader.show"></loading-spinner>
     <img src="@/assets/logo.svg" alt="deskree-logo" class="logo" />
     <div class="container">
       <h1>Join project</h1>
@@ -40,12 +41,14 @@ import { defineComponent } from "vue";
 import TextInput from "@/components/TextInput.vue";
 import Button from "@/components/Button.vue";
 import { client } from "@/server";
+import LoadingSpinner from "@/components/LoadingSpinner.vue";
 
 export default defineComponent({
   name: "UserInvite",
   components: {
     TextInput,
     Button,
+    LoadingSpinner,
   },
   props: {
     oobCode: {
@@ -86,15 +89,18 @@ export default defineComponent({
     },
     async onSubmit(): Promise<any> {
       try {
+        this.preloader.show = true;
+        this.preloader.text = "Accepting invitation...";
         await client.post("/auth/accounts/verify/invite", {
           oobCode: this.oobCode,
-          password: this.form.password,
+          newPassword: this.form.password,
           uid: this.uid,
         });
         await this.login();
       } catch (e) {
         console.error(e);
       }
+      this.resetLoader();
     },
     resetLoader() {
       this.preloader.show = false;
