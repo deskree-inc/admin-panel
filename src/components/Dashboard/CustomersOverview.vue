@@ -101,17 +101,17 @@ export default defineComponent({
       this.ticket.title = "";
       this.loading = false;
     },
-    async createTicket(companyName: string, customerName: string) {
+    async createTicket() {
       try {
         this.loading = true;
         await client.post("/integrations/github/repos/deskree-inc/admin-panel/issues", {
-          title: `${companyName} | ${customerName}`,
+          title: this.ticket.title,
           body: this.ticket.description,
         });
       } catch (e) {
         console.error(e);
       }
-      await this.discardModal();
+      this.discardModal();
     },
   },
 });
