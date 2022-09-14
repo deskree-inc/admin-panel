@@ -39,6 +39,7 @@
     :show="openModal"
     button-text="Save"
     header-text="Create ticket"
+    :loading="loading"
     @confirm="createTicket"
     @discard="discardModal"
   >
@@ -83,6 +84,7 @@ export default defineComponent({
   data() {
     return {
       openModal: false,
+      loading: false,
       ticket: {
         title: "",
         description: "",
@@ -97,9 +99,11 @@ export default defineComponent({
     discardModal() {
       this.openModal = false;
       this.ticket.title = "";
+      this.loading = false;
     },
     async createTicket(companyName: string, customerName: string) {
       try {
+        this.loading = true;
         await client.post("/integrations/github/repos/deskree-inc/admin-panel/issues", {
           title: `${companyName} | ${customerName}`,
           body: this.ticket.description,
@@ -107,6 +111,7 @@ export default defineComponent({
       } catch (e) {
         console.error(e);
       }
+      await this.discardModal();
     },
   },
 });

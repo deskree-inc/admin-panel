@@ -6,14 +6,14 @@
         <div :class="classType ? 'confirm-modal-avatar' : 'confirm-modal-body'">
           <slot></slot>
         </div>
-        <Button
-          mod="success"
+        <button
           @click="handleConfirm"
-          width="100%"
           :type="buttonType"
           :disabled="buttonDisabled"
-        >{{ buttonText }}
-        </Button>
+          :class="!loading ? 'gen-btn' : 'gen-btn loading'"
+        >
+          {{ loading ? "" : buttonText }}
+        </button>
       </div>
     </div>
   </transition>
@@ -21,13 +21,9 @@
 
 <script lang="ts">
 import { defineComponent } from "vue";
-import Button from "@/components/Button.vue";
 
 export default defineComponent({
   name: "GenericModal",
-  components: {
-    Button,
-  },
   props: {
     buttonText: {
       type: String,
@@ -50,6 +46,10 @@ export default defineComponent({
       required: true,
     },
     classType: {
+      type: Boolean,
+      default: false,
+    },
+    loading: {
       type: Boolean,
       default: false,
     },
@@ -129,5 +129,40 @@ export default defineComponent({
   color: #dddddd;
   white-space: pre-line;
   margin-bottom: 25px;
+}
+
+.gen-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+  height: 40px;
+  font-size: 11px;
+  font-weight: bold;
+  color: #ffffff;
+  background-color: #45a07d;
+  outline: none;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+  &.loading::after {
+    content: "";
+    position: absolute;
+    width: 16px;
+    height: 16px;
+    border: 4px solid transparent;
+    border-top-color: #ffffff;
+    border-radius: 50%;
+    animation: button-loading-spinner 1s ease infinite;
+    @keyframes button-loading-spinner {
+      from {
+        transform: rotate(0turn);
+      }
+
+      to {
+        transform: rotate(1turn);
+      }
+    }
+  }
 }
 </style>
