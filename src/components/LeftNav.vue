@@ -6,7 +6,7 @@
           alt="dashboard-icon"
           class="dashboard-icon"
       />
-      <span class="nav-link">Logout</span>
+      <span class="nav-link" @click="logout">Logout</span>
     </div>
     <h1>Admin Panel</h1>
     <nav>
@@ -41,6 +41,12 @@ export default defineComponent({
       required: true,
     },
   },
+  methods: {
+    logout() {
+      this.$store.commit('logout', {});
+      this.$router.push("/login");
+    },
+  }
 })
 
 </script>
