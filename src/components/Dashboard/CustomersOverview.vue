@@ -26,6 +26,7 @@
                 class="two-pixels-right"
               />
             </td>
+            <Button mod="primary" width="100%" style="margin-top: 8px">Create ticket</Button>
           </tr>
         </tbody>
         <tbody v-else>
@@ -45,11 +46,13 @@
 <script lang="ts">
 import { defineComponent } from "vue";
 import HeaderCell from "@/components/HeaderCell.vue";
+import Button from "@/components/Button.vue";
 
 export default defineComponent({
   name: "CustomersOverview",
   components: {
     HeaderCell,
+    Button,
   },
   props: {
     header: {
@@ -139,7 +142,6 @@ export default defineComponent({
             justify-content: center;
             align-items: center;
             max-width: 250px;
-            cursor: pointer;
 
             &.active {
               border: 2px solid $primary-color;
