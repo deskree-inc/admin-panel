@@ -104,7 +104,7 @@ export default defineComponent({
     async createTicket() {
       try {
         this.loading = true;
-        await client.post("/integrations/github/repos/deskree-inc/admin-panel/issues", {
+        await client.post(`/integrations/github/repos/${process.env.VUE_APP_GITHUB_OWNER}/${process.env.VUE_APP_GITHUB_REPO}/issues`, {
           title: this.ticket.title,
           body: this.ticket.description,
         });
